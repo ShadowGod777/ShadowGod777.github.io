@@ -1,33 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manny On A Mission</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #0e101c;
-      color: #fff;
-      text-align: center;
-      padding: 50px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MannyOnAMission.me</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+  body {
+    margin: 0;
+    background: #0f0f0f;
+    color: #33ff33;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  header {
+    margin-top: 3rem;
+    text-align: center;
+    position: relative;
+  }
+  h1 {
+    font-size: 3rem;
+    text-shadow:
+      0 0 5px #33ff33,
+      0 0 10px #33ff33,
+      0 0 20px #22ff22,
+      0 0 30px #22ff22,
+      0 0 40px #00ff00;
+    color: #00ff00;
+    animation: flicker 3s infinite;
+  }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow:
+        0 0 5px #33ff33,
+        0 0 10px #33ff33,
+        0 0 20px #22ff22,
+        0 0 30px #22ff22,
+        0 0 40px #00ff00;
+      color: #00ff00;
     }
-    h1 {
-      color: #00d9ff;
+    20%, 22%, 24%, 55% {
+      text-shadow: none;
+      color: #003300;
     }
-    a {
-      color: #00d9ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  }
+  .typed-text {
+    font-size: 1.2rem;
+    color: #00ff00cc;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+    height: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #00ff00;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #00ff00 }
+  }
+  main {
+    max-width: 700px;
+    margin: 3rem 1rem;
+    background: #111;
+    border: 1px solid #22ff22aa;
+    padding: 2rem;
+    box-shadow: 0 0 15px #22ff22aa;
+    border-radius: 8px;
+  }
+  main h2 {
+    border-bottom: 1px solid #22ff22aa;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  a {
+    color: #55ff55;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  footer {
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: #00aa00aa;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-  <h1>Manny On A Mission</h1>
-  <p>Welcome to my personal site.</p>
-  <p>Check out my business: <a href="https://eandrtech.tech" target="_blank">EandRTech</a></p>
+  <header>
+    <h1 id="main-heading">MannyOnAMission.me</h1>
+    <div class="typed-text" id="typed-text"></div>
+  </header>
+  <main>
+    <section>
+      <h2>Mission Statement</h2>
+      <p>From breaking cycles to building tech — this is my journey to innovate, educate, and empower others through code and hustle.</p>
+    </section>
+    <section>
+      <h2>About Me</h2>
+      <p>A relentless learner and tech hustler turning challenges into breakthroughs. Father, entrepreneur, and defender of the digital frontier.</p>
+    </section>
+    <section>
+      <h2>Portfolio</h2>
+      <p>Projects include PC builds, bug bounty hunts, security operations, and more. <a href="/portfolio.html">See more</a></p>
+    </section>
+    <section>
+      <h2>Blog</h2>
+      <p>Sharing tech tips, personal growth stories, and lessons learned along the way. <a href="/blog.html">Read the latest</a></p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 MannyOnAMission.me &nbsp; | &nbsp; <a href="mailto:manny@example.com">Contact</a>
+  </footer>
+  <script>
+    const textLines = [
+      "Tech built by Manny, for everyone. >_",
+      "Hacking my way to a better future...",
+      "Building, learning, growing...",
+      "Join the mission."
+    ];
+    let currentLine = 0;
+    let currentChar = 0;
+    const typingSpeed = 75;
+    const erasingSpeed = 50;
+    const delayBetweenLines = 2000;
+    const typedTextElement = document.getElementById('typed-text');
+
+    function typeLine() {
+      if (currentChar < textLines[currentLine].length) {
+        typedTextElement.textContent += textLines[currentLine].charAt(currentChar);
+        currentChar++;
+        setTimeout(typeLine, typingSpeed);
+      } else {
+        setTimeout(eraseLine, delayBetweenLines);
+      }
+    }
+    function eraseLine() {
+      if (currentChar > 0) {
+        typedTextElement.textContent = typedTextElement.textContent.slice(0, -1);
+        currentChar--;
+        setTimeout(eraseLine, erasingSpeed);
+      } else {
+        currentLine = (currentLine + 1) % textLines.length;
+        setTimeout(typeLine, typingSpeed);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      if(textLines.length) typeLine();
+    });
+  </script>
 </body>
 </html>
+
